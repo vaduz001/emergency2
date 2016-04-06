@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,20 +15,11 @@
 </head>
 <body>
 
-<div class="container">
-	<div class="jumbotron">
-		<h1>User List</h1>
-		
-  
+<%- include partials/header.ejs %>
 
+    <h1><%= title %></h1>
+    <p class="jumbotron"><%= message %></p>
 
-
-</form>
-<ul>
-   
-</ul>
-	</div>
-</div>
-	
-</body>
+    <a href="/auth/login" title="Login">Login</a> or <a href="/auth/register" title="Register">Register</a>
+  </body>
 </html>

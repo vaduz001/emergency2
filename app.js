@@ -56,20 +56,19 @@ db.once('open', function(callback) {
 
 
 
+// connect to local instance directly
+// mongoose.connect('mongodb://localhost/test');
+
+// connect to mlab instance directly
+// mongoose.connect('mongodb://gcrfreeman:2106pass@ds056288.mlab.com:56288/comp2106');
+
+
+// read db connection string from our config file
+var configDb = require('./config/db.js');
+mongoose.connect(configDb.url);
 
 
 // error handlers
-
-
-
-
-
-
-
-
-
-
-
 
 
 

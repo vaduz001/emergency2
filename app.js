@@ -10,10 +10,11 @@ var db = monk('localhost:27017/emergency2');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var app = express();
-
+var MongoClient = mongodb.MongoClient;
+var url = 'mongodb://localhost:27017/emergency2';
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -27,6 +28,11 @@ app.use(function(req,res,next){
     req.db = db;
     next();
 });
+
+
+// enable flash for showing messages
+app.use(flash());
+
 app.use('/', routes);
 app.use('/users', users);
 
@@ -37,7 +43,35 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'DB Error: '));
+
+db.once('open', function(callback) {
+  console.log('Connected to mongodb');
+});
+
+ mongoose.connect('mongodb://localhost/emergency2');
+
+
+
+
+
 // error handlers
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // development error handler
 // will print stacktrace
@@ -61,5 +95,19 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// Use connect method to connect to the Server
+MongoClient.connect(url, function (err, db) {
+  if (err) {
+    console.log('Unable to connect to the mongoDB server. Error:', err);
+  } else {
+    //HURRAY!! We are connected. :)
+    console.log('Connection established to', url);
+
+    // do some work here with the database.
+
+    //Close connection
+    db.close();
+  }
+});
 
 module.exports = app;

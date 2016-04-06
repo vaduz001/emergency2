@@ -15,11 +15,16 @@
 <div class="container">
 	<div class="jumbotron">
 		<h1>User List</h1>
-		
+		<form action="<%= action %>" method="post">
   
+<% if (fields.length) { %>
+    <% fields.forEach(function(field){ %>
+        <label><%= field.name %></label>
+        <input type="<%= field.type %>" name="<%= field.name %>" <% if (field.property) { %> <%= field.property %> <% } %> >
+    <% }) %>
+<% } %>
 
-
-
+<button type="submit"><%= title %></button> <!--Title for button is same as that of the page-->
 </form>
 <ul>
    
